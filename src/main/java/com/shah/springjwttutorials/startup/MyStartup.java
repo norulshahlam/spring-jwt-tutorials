@@ -60,6 +60,10 @@ public class MyStartup {
 
             log.info("Saving users...");
             userRepo.saveAll(List.of(userAdmin, userApplicant, userAssessor, userApprover));
+            userRepo.save(userAdmin);
+            userRepo.save(userApplicant);
+            userRepo.save(userAssessor);
+            userRepo.save(userApprover);
         };
     }
 }
