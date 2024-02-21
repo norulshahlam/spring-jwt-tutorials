@@ -1,0 +1,34 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  info:
+    env:
+      enabled: true
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: admin
+    password: password
+    hikari:
+      idle-timeout: 10000
+      maximum-pool-size: 10
+      max-lifetime: 1000
+      connection-timeout: 20000
+      auto-commit: true
+  jpa:
+    generate-ddl: true
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        ddl-auto: update
+  sql:
+    init:
+      mode: always
+  batch:
+    job:
+      enabled: false
+    initialize-schema: ALWAYS

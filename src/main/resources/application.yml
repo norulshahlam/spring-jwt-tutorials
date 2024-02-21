@@ -1,0 +1,22 @@
+server:
+  port: 8082
+spring-doc:
+  pathsToMatch: /api/v1/**
+  title: Spring Security JWT
+  version: v1
+  description: Tutorials for creating JWT
+  url: http://www.norulshahlam.com/
+  name: Safety Tech Solutions
+  email: norulshahlam@gmail.com
+  license-name: License 30AP
+  license-url: url
+spring:
+  application:
+    name: permit-to-work
+    description: Permit to work application
+    profile: generic
+  output:
+    ansi:
+      enabled: ALWAYS
+    main:
+      banner-mode: off
