@@ -45,13 +45,13 @@ public class SpringJwtTutorialsApplication {
             Role approver = Role.builder().roleName(APPROVER).build();
 
             log.info("Saving roles...");
-//			roleRepo.saveAll(List.of(admin,applicant,assessor,approver));
+//            roleRepo.saveAll(List.of(admin, applicant, assessor, approver));
 
             UserRegistration userAdmin = UserRegistration.builder()
                     .email("admin@gmail.com")
                     .name("admin")
                     .password("1234")
-                    .roles(List.of(admin,approver))
+                    .roles(List.of(admin, approver))
                     .build();
             UserRegistration user2 = UserRegistration.builder()
                     .email("applicant@gmail.com")
@@ -72,16 +72,11 @@ public class SpringJwtTutorialsApplication {
                     .roles(List.of(approver))
                     .build();
 
+            log.info("Saving user...");
             userRepo.save(userAdmin);
 
             log.info("Saving users...");
-            userRepo.saveAll(List.of(userAdmin,user2,user3,user4));
-//			userService.addRoleToUser("John@gmail.com", "ROLE_USER");
-//			userService.addRoleToUser("Will@gmail.com", "ROLE_MANAGER");
-//			userService.addRoleToUser("Jim@gmail.com", "ROLE_ADMIN");
-//			userService.addRoleToUser("Arnold@gmail.com", "ROLE_SUPER_ADMIN");
-//			userService.addRoleToUser("Arnold@gmail.com", "ROLE_ADMIN");
-//			userService.addRoleToUser("Arnold@gmail.com", "ROLE_USER");
+            userRepo.saveAll(List.of(userAdmin, user2, user3, user4));
         };
     }
 }
