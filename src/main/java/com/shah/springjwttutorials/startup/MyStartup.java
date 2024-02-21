@@ -21,13 +21,17 @@ public class MyStartup {
     CommandLineRunner run(UserRepo userRepo, RoleRepo roleRepo) {
         return args -> {
 
+            log.info("Deleting existing data...");
+            userRepo.deleteAll();
+            roleRepo.deleteAll();
             Role admin = Role.builder().roleName(ADMIN).build();
             Role applicant = Role.builder().roleName(APPLICANT).build();
             Role assessor = Role.builder().roleName(ASSESSOR).build();
             Role approver = Role.builder().roleName(APPROVER).build();
 
+
             log.info("Saving roles...");
-//            roleRepo.saveAll(List.of(admin, applicant, assessor, approver));
+            roleRepo.saveAll(List.of(admin, applicant, assessor, approver));
 
             UserRegistration userAdmin = UserRegistration.builder()
                     .email("admin@gmail.com")
@@ -35,30 +39,27 @@ public class MyStartup {
                     .password("1234")
                     .roles(List.of(admin, approver))
                     .build();
-            UserRegistration user2 = UserRegistration.builder()
+            UserRegistration userApplicant = UserRegistration.builder()
                     .email("applicant@gmail.com")
                     .name("applicant")
                     .password("1234")
                     .roles(List.of(applicant))
                     .build();
-            UserRegistration user3 = UserRegistration.builder()
+            UserRegistration userAssessor = UserRegistration.builder()
                     .email("assessor@gmail.com")
                     .name("assessor")
                     .password("1234")
                     .roles(List.of(assessor))
                     .build();
-            UserRegistration user4 = UserRegistration.builder()
+            UserRegistration userApprover = UserRegistration.builder()
                     .email("approver@gmail.com")
                     .name("approver")
                     .password("1234")
                     .roles(List.of(approver))
                     .build();
 
-            log.info("Saving user...");
-            userRepo.save(userAdmin);
-
             log.info("Saving users...");
-            userRepo.saveAll(List.of(userAdmin, user2, user3, user4));
+            userRepo.saveAll(List.of(userAdmin, userApplicant, userAssessor, userApprover));
         };
     }
 }
