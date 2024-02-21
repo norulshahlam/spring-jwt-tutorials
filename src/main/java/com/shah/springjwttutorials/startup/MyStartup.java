@@ -29,7 +29,6 @@ public class MyStartup {
             Role assessor = Role.builder().roleName(ASSESSOR).build();
             Role approver = Role.builder().roleName(APPROVER).build();
 
-
             log.info("Saving roles...");
             roleRepo.saveAll(List.of(admin, applicant, assessor, approver));
 
