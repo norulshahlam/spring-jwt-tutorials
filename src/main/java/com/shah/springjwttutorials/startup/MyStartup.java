@@ -58,7 +58,6 @@ public class MyStartup {
                     .build();
 
             log.info("Saving users...");
-            userRepo.saveAll(List.of(userAdmin, userApplicant, userAssessor, userApprover));
             userRepo.save(userAdmin);
             userRepo.save(userApplicant);
             userRepo.save(userAssessor);
