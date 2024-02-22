@@ -6,7 +6,7 @@ spring-doc:
   version: v1
   description: Tutorials for creating JWT
   url: http://www.norulshahlam.com/
-  name: Safety Tech Solutions
+  name: norulshahlam & Co
   email: norulshahlam@gmail.com
   license-name: License 30AP
   license-url: url
@@ -20,3 +20,11 @@ spring:
       enabled: ALWAYS
     main:
       banner-mode: off
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  info:
+    env:
+      enabled: true

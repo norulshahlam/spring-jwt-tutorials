@@ -23,8 +23,23 @@ public class MyController {
     }
 
     @GetMapping("/admin")
-    public ResponseEntity<String> helloAdmin() {
+    public ResponseEntity<String> admin() {
         return ResponseEntity.status(HttpStatus.FOUND).body("Hello Admin");
+    }
+
+    @GetMapping("/assessor")
+    public ResponseEntity<String> assessor() {
+        return ResponseEntity.status(HttpStatus.FOUND).body("Hello Assessor");
+    }
+
+    @GetMapping("/applicant")
+    public ResponseEntity<String> applicant() {
+        return ResponseEntity.status(HttpStatus.FOUND).body("Hello applicant");
+    }
+
+    @GetMapping("/approver")
+    public ResponseEntity<String> approver() {
+        return ResponseEntity.status(HttpStatus.FOUND).body("Hello approver");
     }
 
 
