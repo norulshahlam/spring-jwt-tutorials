@@ -74,6 +74,7 @@ public class SecurityConfig {
                                         "/h2-console/**",
                                         "/v3/api-docs/**",
                                         "/swagger-ui/**",
+                                        "/api/v1/anyRole",
                                         "/swagger-ui.html")
                                 .permitAll()
                                 .requestMatchers(GET, "/api/v1/admin")
