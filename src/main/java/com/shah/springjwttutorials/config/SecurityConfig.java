@@ -31,16 +31,19 @@ public class SecurityConfig {
                 .withUsername("applicant")
                 .password((passwordEncoder().encode("password")))
                 .roles(APPLICANT.name())
+                .authorities(APPLICANT.name())
                 .build();
         UserDetails assessor = User
                 .withUsername("assessor")
                 .password((passwordEncoder().encode("password")))
                 .roles(ASSESSOR.name())
+                .authorities(ASSESSOR.name())
                 .build();
         UserDetails approver = User
                 .withUsername("approver")
                 .password((passwordEncoder().encode("password")))
                 .roles(APPROVER.name())
+                .authorities(APPROVER.name())
                 .build();
 
         // You encode yourself then insert - value is `password`
@@ -48,6 +51,7 @@ public class SecurityConfig {
                 .withUsername("admin")
                 .password("$2a$09$9j2c1BTj4zMU.oaaSNumhOfgYuK21hfNiDR.H8HoE677Vh3kPsuQC")
                 .roles(ADMIN.name())
+                .authorities(ADMIN.name())
                 .build();
 
         return new InMemoryUserDetailsManager(admin, applicant, assessor, approver);
@@ -76,14 +80,14 @@ public class SecurityConfig {
                                         "/swagger-ui/**",
                                         "/swagger-ui.html")
                                 .permitAll()
-                                .requestMatchers(GET, "/admin")
-                                .hasAnyRole(ADMIN.name())
-                                .requestMatchers(GET, "/applicant")
-                                .hasAnyRole(APPLICANT.name())
-                                .requestMatchers(GET, "/assessor")
-                                .hasAnyRole(ASSESSOR.name())
-                                .requestMatchers(GET, "/approver")
-                                .hasAnyRole(APPROVER.name())
+                                .requestMatchers(GET, "/api/v1/admin")
+                                .hasAuthority(ADMIN.name())
+                                .requestMatchers(GET, "/api/v1/applicant")
+                                .hasAuthority(APPLICANT.name())
+                                .requestMatchers(GET, "/api/v1/assessor")
+                                .hasAuthority(ASSESSOR.name())
+                                .requestMatchers(GET, "/api/v1/approver")
+                                .hasAuthority(APPROVER.name())
                                 .anyRequest().authenticated())
                 .headers(headers -> headers
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
