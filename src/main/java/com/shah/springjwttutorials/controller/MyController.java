@@ -50,6 +50,13 @@ public class MyController {
     public ResponseEntity<String> approver() {
         return ResponseEntity.status(HttpStatus.FOUND).body("Hello approver");
     }
+ @GetMapping("/anyRole")
+    @Operation(summary = "for user having any role",
+            description = "This endpoint will be accessible for user having any role. No need for credentials. You " +
+                    "can use current credentials but wrong one will trigger 401")
+    public ResponseEntity<String> anyRole() {
+        return ResponseEntity.status(HttpStatus.FOUND).body("Hello any role");
+    }
 
 
 }
