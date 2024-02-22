@@ -13,7 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static com.shah.springjwttutorials.enums.RoleName.ADMIN;
+import static com.shah.springjwttutorials.enums.RoleName.*;
+import static org.springframework.http.HttpMethod.GET;
 
 /**
  * @author NORUL
@@ -26,19 +27,30 @@ public class SecurityConfig {
     public InMemoryUserDetailsManager userDetailsManager() {
 
         // Using Spring to encode password for you - Not secure
-        UserDetails user = User
-                .withUsername("user")
+        UserDetails applicant = User
+                .withUsername("applicant")
                 .password((passwordEncoder().encode("password")))
-                .roles("USER")
+                .roles(APPLICANT.name())
+                .build();
+        UserDetails assessor = User
+                .withUsername("assessor")
+                .password((passwordEncoder().encode("password")))
+                .roles(ASSESSOR.name())
+                .build();
+        UserDetails approver = User
+                .withUsername("approver")
+                .password((passwordEncoder().encode("password")))
+                .roles(APPROVER.name())
                 .build();
 
         // You encode yourself then insert - value is `password`
         UserDetails admin = User
                 .withUsername("admin")
                 .password("$2a$09$9j2c1BTj4zMU.oaaSNumhOfgYuK21hfNiDR.H8HoE677Vh3kPsuQC")
-                .roles("ADMIN")
+                .roles(ADMIN.name())
                 .build();
-        return new InMemoryUserDetailsManager(user, admin);
+
+        return new InMemoryUserDetailsManager(admin, applicant, assessor, approver);
     }
 
     /**
@@ -64,8 +76,14 @@ public class SecurityConfig {
                                         "/swagger-ui/**",
                                         "/swagger-ui.html")
                                 .permitAll()
-                                .requestMatchers("admin")
+                                .requestMatchers(GET, "/admin")
                                 .hasAnyRole(ADMIN.name())
+                                .requestMatchers(GET, "/applicant")
+                                .hasAnyRole(APPLICANT.name())
+                                .requestMatchers(GET, "/assessor")
+                                .hasAnyRole(ASSESSOR.name())
+                                .requestMatchers(GET, "/approver")
+                                .hasAnyRole(APPROVER.name())
                                 .anyRequest().authenticated())
                 .headers(headers -> headers
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
