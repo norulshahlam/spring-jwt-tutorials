@@ -7,6 +7,7 @@ import com.shah.springjwttutorials.repository.UserRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,6 +17,12 @@ import static com.shah.springjwttutorials.enums.RoleName.*;
 @Component
 @Slf4j
 public class MyStartup {
+
+    private final PasswordEncoder passwordEncoder;
+
+    public MyStartup(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Bean
     CommandLineRunner run(UserRepo userRepo, RoleRepo roleRepo) {
@@ -35,25 +42,25 @@ public class MyStartup {
             UserRegistration userAdmin = UserRegistration.builder()
                     .email("admin@gmail.com")
                     .name("admin")
-                    .password("1234")
+                    .password(passwordEncoder.encode("1234"))
                     .roles(List.of(admin, approver))
                     .build();
             UserRegistration userApplicant = UserRegistration.builder()
                     .email("applicant@gmail.com")
                     .name("applicant")
-                    .password("1234")
+                    .password(passwordEncoder.encode("1234"))
                     .roles(List.of(applicant))
                     .build();
             UserRegistration userAssessor = UserRegistration.builder()
                     .email("assessor@gmail.com")
                     .name("assessor")
-                    .password("1234")
+                    .password(passwordEncoder.encode("1234"))
                     .roles(List.of(assessor))
                     .build();
             UserRegistration userApprover = UserRegistration.builder()
                     .email("approver@gmail.com")
                     .name("approver")
-                    .password("1234")
+                    .password(passwordEncoder.encode("1234"))
                     .roles(List.of(approver))
                     .build();
 
