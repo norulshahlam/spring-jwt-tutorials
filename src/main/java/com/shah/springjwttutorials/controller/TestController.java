@@ -27,6 +27,7 @@ public class TestController {
     @Operation(summary = "for user having ADMIN role",
             description = "This endpoint will be accessible for user having ADMIN role")
     public ResponseEntity<String> admin() {
+        log.info("In TestController:admin");
         return ResponseEntity.status(HttpStatus.FOUND).body("Hello Admin");
     }
 
@@ -34,6 +35,7 @@ public class TestController {
     @Operation(summary = "for user having ASSESSOR role",
             description = "This endpoint will be accessible for user having ASSESSOR role")
     public ResponseEntity<String> assessor() {
+        log.info("In TestController:assessor");
         return ResponseEntity.status(HttpStatus.FOUND).body("Hello Assessor");
     }
 
@@ -41,6 +43,7 @@ public class TestController {
     @Operation(summary = "for user having APPLICANT role",
             description = "This endpoint will be accessible for user having APPLICANT role")
     public ResponseEntity<String> applicant() {
+        log.info("In TestController:applicant");
         return ResponseEntity.status(HttpStatus.FOUND).body("Hello applicant");
     }
 
@@ -48,6 +51,7 @@ public class TestController {
     @Operation(summary = "for user having APPROVER role",
             description = "This endpoint will be accessible for user having APPROVER role")
     public ResponseEntity<String> approver() {
+        log.info("In TestController:approver");
         return ResponseEntity.status(HttpStatus.FOUND).body("Hello approver");
     }
  @GetMapping("/anyRole")
@@ -55,6 +59,7 @@ public class TestController {
             description = "This endpoint will be accessible for user having any role. No need for credentials. You " +
                     "can use current credentials but wrong one will trigger 401")
     public ResponseEntity<String> anyRole() {
+     log.info("In TestController:anyRole");
         return ResponseEntity.status(HttpStatus.FOUND).body("Hello any role");
     }
 
