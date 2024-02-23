@@ -2,6 +2,7 @@ package com.shah.springjwttutorials.service;
 
 import com.shah.springjwttutorials.dto.AuthenticationRequest;
 import com.shah.springjwttutorials.dto.AuthenticationResponse;
+import com.shah.springjwttutorials.entity.UserRegistration;
 import com.shah.springjwttutorials.jwt.JwtService;
 import com.shah.springjwttutorials.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,7 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-        var user = repository.findByEmail(request.getEmail())
+        UserRegistration user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
