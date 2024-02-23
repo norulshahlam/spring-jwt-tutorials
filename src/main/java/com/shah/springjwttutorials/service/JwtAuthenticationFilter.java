@@ -21,6 +21,7 @@ import java.io.IOException;
 
 /**
  * @author NORUL
+ * All request will go through this method for filtering process
  */
 @Component
 @RequiredArgsConstructor
@@ -33,11 +34,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
 
+        /*
+         * Don't do anything if there is no JWT in headers. this will return 401 unless endpoint is whitelisted in
+         * SecurityConfig.class
+         */
         final String authHeader = request.getHeader("Authorization");
         if (ObjectUtils.isEmpty(authHeader) || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
+
+        /*
+         * Extract JWT if there is JWT in headers. This will then extract the roles and allows access to endpoint, if
+         *  the roles allows it, which is specified in SecurityConfig.class. Else it will return 401
+         */
         final String jwt = authHeader.substring(7);
         final String userEmail = jwtService.extractUsername(jwt);
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
