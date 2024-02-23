@@ -1,5 +1,6 @@
 package com.shah.springjwttutorials.config;
 
+import com.shah.springjwttutorials.service.JwtAuthenticationFilter;
 import com.shah.springjwttutorials.service.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static com.shah.springjwttutorials.enums.RoleName.*;
 import static org.springframework.http.HttpMethod.GET;
@@ -28,9 +30,11 @@ import static org.springframework.http.HttpMethod.GET;
 public class SecurityConfig {
 
     private final UserDetailsServiceImpl userDetailsService;
+    private final JwtAuthenticationFilter jwtAuthFilter;
 
-    public SecurityConfig(UserDetailsServiceImpl userDetailsService) {
+    public SecurityConfig(UserDetailsServiceImpl userDetailsService, JwtAuthenticationFilter jwtAuthFilter) {
         this.userDetailsService = userDetailsService;
+        this.jwtAuthFilter = jwtAuthFilter;
     }
 
     @Bean
@@ -84,7 +88,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         return http
-                .authenticationProvider(authenticationProvider())
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/h2-console/**")
                         .disable())
@@ -94,6 +97,7 @@ public class SecurityConfig {
                                         "/v3/api-docs/**",
                                         "/swagger-ui/**",
                                         "/api/v1/anyRole",
+                                        "/api/v1/login",
                                         "/swagger-ui.html")
                                 .permitAll()
                                 .requestMatchers(GET, "/api/v1/admin")
@@ -105,6 +109,8 @@ public class SecurityConfig {
                                 .requestMatchers(GET, "/api/v1/approver")
                                 .hasAnyRole(APPROVER.name())
                                 .anyRequest().authenticated())
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .authenticationProvider(authenticationProvider())
                 .headers(headers -> headers
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .httpBasic(Customizer.withDefaults())
