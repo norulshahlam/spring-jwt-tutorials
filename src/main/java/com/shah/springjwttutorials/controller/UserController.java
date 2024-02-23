@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @RequestMapping("/api/v1/")
-public class AuthenticationController {
+public class UserController {
 
     private final AuthenticationService service;
 
-    public AuthenticationController(AuthenticationService service) {
+    public UserController(AuthenticationService service) {
         this.service = service;
     }
 
