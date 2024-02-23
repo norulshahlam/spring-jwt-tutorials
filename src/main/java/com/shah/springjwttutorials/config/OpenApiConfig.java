@@ -14,9 +14,10 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @SecurityScheme(
-        name = "basicAuth", // can be set to anything
+        name = "Bearer Authentication",
         type = SecuritySchemeType.HTTP,
-        scheme = "basic"
+        bearerFormat = "JWT",
+        scheme = "bearer"
 )
 public class OpenApiConfig {
 
@@ -47,4 +48,6 @@ public class OpenApiConfig {
                 .name(properties.getLicenseName())
                 .url(properties.getLicenseUrl());
     }
+
+
 }
