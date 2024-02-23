@@ -86,12 +86,18 @@ public class SecurityConfig {
                         .disable())
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers(
-                                        "/h2-console/**",
+                                        "/v2/api-docs",
+                                        "/v3/api-docs",
                                         "/v3/api-docs/**",
+                                        "/swagger-resources",
+                                        "/swagger-resources/**",
+                                        "/configuration/ui",
+                                        "/configuration/security",
                                         "/swagger-ui/**",
+                                        "/webjars/**",
+                                        "/swagger-ui.html",
                                         "/api/v1/anyRole",
-                                        "/api/v1/login",
-                                        "/swagger-ui.html")
+                                        "/api/v1/login")
                                 .permitAll()
                                 .requestMatchers(GET, "/api/v1/admin")
                                 .hasAnyRole(ADMIN.name())
