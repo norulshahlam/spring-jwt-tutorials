@@ -54,6 +54,7 @@ public class SecurityConfig {
                         .disable())
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers(
+                                        "/h2-console/**",
                                         "/v2/api-docs",
                                         "/v3/api-docs",
                                         "/v3/api-docs/**",
