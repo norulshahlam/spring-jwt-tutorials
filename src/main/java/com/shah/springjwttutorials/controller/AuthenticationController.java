@@ -20,10 +20,10 @@ public class AuthenticationController {
     public AuthenticationController(AuthenticationService service) {
         this.service = service;
     }
+
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> authenticate(
-            @RequestBody AuthenticationRequest request
-    ) {
+    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
+        log.info("Logging in...");
         return ResponseEntity.ok(service.authenticate(request));
     }
 }
