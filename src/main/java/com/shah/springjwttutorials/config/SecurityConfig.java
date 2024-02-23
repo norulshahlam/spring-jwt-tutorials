@@ -12,11 +12,8 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -38,37 +35,6 @@ public class SecurityConfig {
         this.userDetailsService = userDetailsService;
         this.jwtAuthFilter = jwtAuthFilter;
     }
-
-    @Bean
-    public InMemoryUserDetailsManager userDetailsManager() {
-
-        // Using Spring to encode password for you - Not secure
-        UserDetails applicant = User
-                .withUsername("applicant")
-                .password((passwordEncoder().encode("password")))
-                .roles(APPLICANT.name())
-                .build();
-        UserDetails assessor = User
-                .withUsername("assessor")
-                .password((passwordEncoder().encode("password")))
-                .roles(ASSESSOR.name())
-                .build();
-        UserDetails approver = User
-                .withUsername("approver")
-                .password((passwordEncoder().encode("password")))
-                .roles(APPROVER.name())
-                .build();
-
-        // You encode yourself then insert - value is `password`
-        UserDetails admin = User
-                .withUsername("admin")
-                .password("$2a$09$9j2c1BTj4zMU.oaaSNumhOfgYuK21hfNiDR.H8HoE677Vh3kPsuQC")
-                .roles(ADMIN.name())
-                .build();
-
-        return new InMemoryUserDetailsManager(admin, applicant, assessor, approver);
-    }
-
 
     /**
      * Allow endpoint with specific roles
