@@ -21,6 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import static com.shah.springjwttutorials.enums.RoleName.*;
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 /**
  * @author NORUL
@@ -108,6 +109,7 @@ public class SecurityConfig {
                                 .requestMatchers(GET, "/api/v1/approver")
                                 .hasAnyRole(APPROVER.name())
                                 .anyRequest().authenticated())
+                .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .authenticationProvider(authenticationProvider())
                 .headers(headers -> headers
