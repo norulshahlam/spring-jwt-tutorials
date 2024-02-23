@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 @RequestMapping("/api/v1/")
-public class MyController {
+public class TestController {
 
     private final UserService userService;
 
-    public MyController(UserService service) {
+    public TestController(UserService service) {
         this.userService = service;
     }
 
