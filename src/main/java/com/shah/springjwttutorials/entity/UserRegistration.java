@@ -39,7 +39,7 @@ public class UserRegistration implements Serializable, UserDetails {
      * This is needed as one user can have the same role as other user and other role
      * e.g. admin user can have role ADMIN and APPROVER while approver user can have only APPROVER role
      */
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList<>();
 
     @Override
