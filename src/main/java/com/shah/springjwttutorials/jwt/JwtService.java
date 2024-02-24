@@ -16,6 +16,8 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
+import static com.shah.springjwttutorials.constants.MyConstants.ACCESS_TOKEN;
+
 @Component
 public class JwtService {
 
@@ -26,16 +28,26 @@ public class JwtService {
     @Value("${jwt.refresh-token.expiration}")
     private long refreshExpiration;
 
-    public String generateToken(UserDetails user) {
+    /**
+     * Generate both token type
+     *
+     * @param user
+     * @param tokenType
+     * @return
+     */
+    public String generateToken(UserDetails user, String tokenType) {
 
-        Map<String, Object> roles = Map.of("authorities",
-                user.getAuthorities().stream().map(GrantedAuthority::getAuthority)
-                        .toList());
+        Map<String, Object> roles = Map.of(
+                "authorities", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList());
+        Date exp = ACCESS_TOKEN.equalsIgnoreCase(tokenType)
+                ? new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1))
+                : new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(24));
+
         return Jwts
                 .builder()
                 .setSubject(user.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1)))
+                .setExpiration(exp)
                 .setIssuer("Norulshahlam")
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .addClaims(roles)

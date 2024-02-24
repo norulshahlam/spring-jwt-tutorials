@@ -13,12 +13,16 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import static com.shah.springjwttutorials.constants.MyConstants.ACCESS_TOKEN;
+import static com.shah.springjwttutorials.constants.MyConstants.REFRESH_TOKEN;
+
 /**
  * @author NORUL
  */
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
+
     private final UserRepo userRepo;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -33,15 +37,15 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public UserLoginResponse authenticate(UserLoginRequest request) {
+    public UserLoginResponse login(UserLoginRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.getEmail(), request.getPassword()));
-        UserRegistration user = userRepo
-                .findByEmail(request.getEmail())
-                .orElseThrow();
-        String jwtToken = jwtService.generateToken(user);
+        UserRegistration user = userRepo.findByEmail(request.getEmail()).orElseThrow();
+        String jwtAccessToken = jwtService.generateToken(user, ACCESS_TOKEN);
+        String jwtRefreshToken = jwtService.generateToken(user, REFRESH_TOKEN);
         return UserLoginResponse.builder()
-                .accessToken(jwtToken)
+                .accessToken(jwtAccessToken)
+                .refreshToken(jwtRefreshToken)
                 .build();
     }
 
