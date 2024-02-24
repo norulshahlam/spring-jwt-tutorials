@@ -1,13 +1,12 @@
 package com.shah.springjwttutorials.service;
 
-import com.shah.springjwttutorials.dto.LoginRequest;
-import com.shah.springjwttutorials.dto.AuthenticationResponse;
+import com.shah.springjwttutorials.dto.UserLoginResponse;
+import com.shah.springjwttutorials.dto.UserLoginRequest;
 import com.shah.springjwttutorials.entity.Role;
 import com.shah.springjwttutorials.entity.UserRegistration;
 import com.shah.springjwttutorials.jwt.JwtService;
 import com.shah.springjwttutorials.repository.RoleRepo;
 import com.shah.springjwttutorials.repository.UserRepo;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Slf4j
-@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
     private final JwtService jwtService;
@@ -27,14 +25,22 @@ public class UserServiceImpl implements UserService {
     private final RoleRepo roleRepo;
     private final PasswordEncoder passwordEncoder;
 
-    public AuthenticationResponse authenticate(LoginRequest request) {
+    public UserServiceImpl(UserRepo userRepo, JwtService jwtService, AuthenticationManager authenticationManager, RoleRepo roleRepo, PasswordEncoder passwordEncoder) {
+        this.userRepo = userRepo;
+        this.jwtService = jwtService;
+        this.authenticationManager = authenticationManager;
+        this.roleRepo = roleRepo;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    public UserLoginResponse authenticate(UserLoginRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.getEmail(), request.getPassword()));
         UserRegistration user = userRepo
                 .findByEmail(request.getEmail())
                 .orElseThrow();
         String jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
+        return UserLoginResponse.builder()
                 .accessToken(jwtToken)
                 .build();
     }
