@@ -1,6 +1,6 @@
 package com.shah.springjwttutorials.service;
 
-import com.shah.springjwttutorials.dto.AuthenticationRequest;
+import com.shah.springjwttutorials.dto.LoginRequest;
 import com.shah.springjwttutorials.dto.AuthenticationResponse;
 import com.shah.springjwttutorials.entity.Role;
 import com.shah.springjwttutorials.entity.UserRegistration;
@@ -27,21 +27,18 @@ public class UserServiceImpl implements UserService {
     private final RoleRepo roleRepo;
     private final PasswordEncoder passwordEncoder;
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
-        );
+    public AuthenticationResponse authenticate(LoginRequest request) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                request.getEmail(), request.getPassword()));
         UserRegistration user = userRepo
                 .findByEmail(request.getEmail())
                 .orElseThrow();
-        var jwtToken = jwtService.generateToken(user);
+        String jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .build();
     }
+
     public UserRegistration saveUser(UserRegistration user) {
         log.info("Saving new user {} to the database", user.getName());
         user.setPassword(passwordEncoder.encode(user.getPassword()));

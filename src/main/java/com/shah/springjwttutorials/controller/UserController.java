@@ -1,6 +1,6 @@
 package com.shah.springjwttutorials.controller;
 
-import com.shah.springjwttutorials.dto.AuthenticationRequest;
+import com.shah.springjwttutorials.dto.LoginRequest;
 import com.shah.springjwttutorials.dto.AuthenticationResponse;
 import com.shah.springjwttutorials.service.UserServiceImpl;
 import jakarta.validation.Valid;
@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody @Valid AuthenticationRequest request) {
+    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody @Valid LoginRequest request) {
         log.info("Logging in...");
         return ResponseEntity.ok(service.authenticate(request));
     }
