@@ -49,7 +49,7 @@ public class JwtService {
                 .setSubject(user.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(exp)
-                .setIssuer("Norulshahlam")
+                .setIssuer("Norulshahlam & Co.")
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .addClaims(roles)
                 .compact();
