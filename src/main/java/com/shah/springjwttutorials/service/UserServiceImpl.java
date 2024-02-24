@@ -42,7 +42,8 @@ public class UserServiceImpl implements UserService {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.getEmail(), request.getPassword()));
         UserRegistration user =
-                userRepo.findByEmail(request.getEmail()).orElseThrow(() -> new UsernameNotFoundException("Email [" + request.getEmail() + "] not found"));
+                userRepo.findByEmail(request.getEmail()).orElseThrow(() ->
+                        new UsernameNotFoundException("Email [" + request.getEmail() + "] not found"));
         String jwtAccessToken = jwtService.generateToken(user, ACCESS_TOKEN);
         String jwtRefreshToken = jwtService.generateToken(user, REFRESH_TOKEN);
         return UserLoginResponse.builder()
