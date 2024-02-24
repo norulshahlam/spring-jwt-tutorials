@@ -1,6 +1,5 @@
 package com.shah.springjwttutorials.controller;
 
-import com.shah.springjwttutorials.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
@@ -18,12 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/")
 @SecurityRequirement(name = "Bearer Authentication")
 public class TestController {
-
-    private final UserService userService;
-
-    public TestController(UserService service) {
-        this.userService = service;
-    }
 
     @GetMapping("/admin")
     @Operation(summary = "for user having ADMIN role",

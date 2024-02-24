@@ -2,7 +2,7 @@ package com.shah.springjwttutorials.controller;
 
 import com.shah.springjwttutorials.dto.AuthenticationRequest;
 import com.shah.springjwttutorials.dto.AuthenticationResponse;
-import com.shah.springjwttutorials.service.AuthService;
+import com.shah.springjwttutorials.service.UserServiceImpl;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/")
 public class UserController {
 
-    private final AuthService service;
+    private final UserServiceImpl service;
 
-    public UserController(AuthService service) {
+    public UserController(UserServiceImpl service) {
         this.service = service;
     }
 
