@@ -23,10 +23,10 @@ public class JwtService {
 
     @Value("${jwt.secret-key}")
     private String secretKey;
-    @Value("${jwt.expiration}")
-    private long jwtExpiration;
-    @Value("${jwt.refresh-token.expiration}")
-    private long refreshExpiration;
+    @Value("${jwt.access-token.expiration-hours}")
+    private long accessTokenExpirationHours;
+    @Value("${jwt.refresh-token.expiration-hours}")
+    private long refreshTokenExpirationHours;
 
     /**
      * Generate both token type
@@ -39,9 +39,10 @@ public class JwtService {
 
         Map<String, Object> roles = Map.of(
                 "authorities", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList());
+
         Date exp = ACCESS_TOKEN.equalsIgnoreCase(tokenType)
-                ? new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1))
-                : new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(24));
+                ? new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(accessTokenExpirationHours))
+                : new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(refreshTokenExpirationHours));
 
         return Jwts
                 .builder()

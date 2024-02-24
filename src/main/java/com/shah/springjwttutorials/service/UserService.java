@@ -11,6 +11,6 @@ import com.shah.springjwttutorials.entity.UserRegistration;
 public interface UserService {
 
     UserLoginResponse login(UserLoginRequest request);
-    Role saveRole(Role role);
-    UserRegistration saveUser(UserRegistration user);
+    Role addRole(Role role);
+    UserRegistration registerUser(UserRegistration user);
 }
