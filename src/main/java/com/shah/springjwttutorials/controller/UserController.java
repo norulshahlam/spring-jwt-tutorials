@@ -3,6 +3,7 @@ package com.shah.springjwttutorials.controller;
 import com.shah.springjwttutorials.dto.MyResponse;
 import com.shah.springjwttutorials.dto.UserLoginRequest;
 import com.shah.springjwttutorials.dto.UserLoginResponse;
+import com.shah.springjwttutorials.entity.UserRegistration;
 import com.shah.springjwttutorials.service.UserServiceImpl;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -27,5 +28,11 @@ public class UserController {
     public ResponseEntity<MyResponse<UserLoginResponse>> login(@RequestBody @Valid UserLoginRequest request) {
         log.info("Logging in...");
         return ResponseEntity.ok(service.login(request));
+    }
+
+    @PostMapping("/registerUser")
+    public ResponseEntity<MyResponse<UserRegistration>> registerUser(@RequestBody @Valid UserRegistration request) {
+        log.info("Logging in...");
+        return ResponseEntity.ok(service.registerUser(request));
     }
 }

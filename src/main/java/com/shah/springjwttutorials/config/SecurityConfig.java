@@ -66,7 +66,8 @@ public class SecurityConfig {
                                         "/webjars/**",
                                         "/swagger-ui.html",
                                         "/api/v1/anyRole",
-                                        "/api/v1/login")
+                                        "/api/v1/login",
+                                        "/api/v1/registerUser")
                                 .permitAll()
                                 .requestMatchers(GET, "/api/v1/admin")
                                 .hasAnyAuthority(ADMIN.name())

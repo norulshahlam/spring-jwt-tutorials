@@ -1,5 +1,6 @@
 package com.shah.springjwttutorials.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shah.springjwttutorials.enums.RoleName;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,8 +18,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Role {
+
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer id;
     @Enumerated(EnumType.STRING)
     @Column(unique = true)

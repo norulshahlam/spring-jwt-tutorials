@@ -12,5 +12,5 @@ public interface UserService {
 
     MyResponse login(UserLoginRequest request);
     Role addRole(Role role);
-    UserRegistration registerUser(UserRegistration user);
+    MyResponse registerUser(UserRegistration user);
 }

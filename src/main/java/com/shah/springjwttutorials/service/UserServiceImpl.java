@@ -54,10 +54,14 @@ public class UserServiceImpl implements UserService {
         return successResponse(response);
     }
 
-    public UserRegistration registerUser(UserRegistration user) {
+    public MyResponse<UserRegistration> registerUser(UserRegistration user) {
+
+        userRepo.findByEmail(user.getEmail()).ifPresent(i -> {
+            throw new UsernameNotFoundException("Email [" + i.getEmail() + "] exists");
+        });
         log.info("Saving new user {} to the database", user.getName());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepo.save(user);
+        return successResponse(userRepo.save(user));
     }
 
     public Role addRole(Role role) {
