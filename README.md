@@ -80,4 +80,16 @@ Connect to database
 List of tables
 
     \d
+
+Stop & remove all running proceses  
+
+    docker rm $(docker ps -a -q) -f  
 </details>
+
+### Use Case
+
+We have preloaded users with different roles for testing. Simply open a browser and hit `http://localhost:8082/swagger-ui/index.html#/` to access swagger API.
+
+- Login to retrieve JWT.
+- Use JWT and paste into Authorization input field.
+- Hit any endpoint to test your role
