@@ -1,6 +1,7 @@
 package com.shah.springjwttutorials.exception;
 
 import com.shah.springjwttutorials.dto.MyResponse;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -42,6 +43,22 @@ public class GlobalExceptionHandler {
         log.error("requestUrl : {}, occurred an error : {}", req.getRequestURI(), cause);
         return MyResponse.failureResponse(cause, "Validation failed for request " +
                 "URI: " + requestUri);
+    }
+
+    /**
+     * Handles ExpiredJwtException thrown by Spring Security.
+     *
+     * @param req the HttpServletRequest object
+     * @param e   the ExpiredJwtException object
+     * @return a MyResponse object with an error message
+     */
+    @ExceptionHandler(ExpiredJwtException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public MyResponse<String> handleExpiredJwtException(HttpServletRequest req, ExpiredJwtException e) {
+        String errorMessages = e.getLocalizedMessage();
+        log.error("requestUrl : {}, occurred an error : {}", req.getRequestURI(), errorMessages);
+        return MyResponse.failureResponse(errorMessages);
     }
 
     /**
