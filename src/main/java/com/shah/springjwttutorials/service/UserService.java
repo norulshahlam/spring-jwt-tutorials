@@ -1,7 +1,7 @@
 package com.shah.springjwttutorials.service;
 
+import com.shah.springjwttutorials.dto.MyResponse;
 import com.shah.springjwttutorials.dto.UserLoginRequest;
-import com.shah.springjwttutorials.dto.UserLoginResponse;
 import com.shah.springjwttutorials.entity.Role;
 import com.shah.springjwttutorials.entity.UserRegistration;
 
@@ -10,7 +10,7 @@ import com.shah.springjwttutorials.entity.UserRegistration;
  */
 public interface UserService {
 
-    UserLoginResponse login(UserLoginRequest request);
+    MyResponse login(UserLoginRequest request);
     Role addRole(Role role);
     UserRegistration registerUser(UserRegistration user);
 }
