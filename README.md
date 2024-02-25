@@ -58,6 +58,9 @@ docker run --name postgres-tutorial -e POSTGRES_PASSWORD=password -d -p 5432:543
 
 ### Test DB
 
+<details>
+<summary>Click to expand</summary><br>
+
 Run docker DB in cli  
 
     docker exec -it postgres bash  
@@ -65,11 +68,16 @@ Run docker DB in cli
 Connect to DB   
 
     psql -h localhost -U admin
-    \l
-    \c postgres;
-    \d
-    
-Test   
 
-    use mydb;  
-    show databases;
+List of databases
+
+    \l
+
+Connect to database
+
+    \c postgres;
+
+List of tables
+
+    \d
+</details>
