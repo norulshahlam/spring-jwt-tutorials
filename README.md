@@ -1,2 +1,24 @@
-docker run --detach --env MYSQL_ROOT_PASSWORD=root --env MYSQL_DATABASE=mydb --env MYSQL_PASSWORD=root --env MYSQL_USER=admin --name localhost --publish 3306:3306 mysql:8.0
+# Spring Security with JWT 
+
+### Introduction
+The Bookstore project is an API service that categorize all the books in this store. It provides a top-of-the-line method to access the book information.
+
+### Features
+This tutorial provides the following features:
+
+- Create a user with roles
+- Remove roles
+- Persist user data in DB
+- Generate JWT and validate it
+
+### Technology Stack
+The Bookstore API is built using the following technology stack:
+
+- Java 17
+- Spring Boot 3.2.2
+- Maven
+- Docker (for PostgreSQL)
+- H2 Database (for local development environment)
+
+### Running your DB instance
 docker run --name postgres-tutorial -e POSTGRES_PASSWORD=password -d -p 5432:5432 postgres
