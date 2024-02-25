@@ -1,5 +1,6 @@
 package com.shah.springjwttutorials.service;
 
+import com.shah.springjwttutorials.dto.MyResponse;
 import com.shah.springjwttutorials.dto.UserLoginResponse;
 import com.shah.springjwttutorials.dto.UserLoginRequest;
 import com.shah.springjwttutorials.entity.Role;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import static com.shah.springjwttutorials.constants.MyConstants.ACCESS_TOKEN;
 import static com.shah.springjwttutorials.constants.MyConstants.REFRESH_TOKEN;
+import static com.shah.springjwttutorials.dto.MyResponse.*;
 
 /**
  * @author NORUL
@@ -38,17 +40,18 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public UserLoginResponse login(UserLoginRequest request) {
+    public MyResponse<UserLoginResponse> login(UserLoginRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.getEmail(), request.getPassword()));
         UserRegistration user = userRepo.findByEmail(request.getEmail()).orElseThrow(() ->
-                        new UsernameNotFoundException("Email [" + request.getEmail() + "] not found"));
+                new UsernameNotFoundException("Email [" + request.getEmail() + "] not found"));
         String jwtAccessToken = jwtService.generateToken(user, ACCESS_TOKEN);
         String jwtRefreshToken = jwtService.generateToken(user, REFRESH_TOKEN);
-        return UserLoginResponse.builder()
+        UserLoginResponse response = UserLoginResponse.builder()
                 .accessToken(jwtAccessToken)
                 .refreshToken(jwtRefreshToken)
                 .build();
+        return successResponse(response);
     }
 
     public UserRegistration registerUser(UserRegistration user) {
