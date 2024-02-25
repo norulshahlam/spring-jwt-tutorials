@@ -21,6 +21,14 @@ import java.util.List;
 @Slf4j
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(MyException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public MyResponse<String> handleMyException(HttpServletRequest req, MyException e) {
+        String errorMessages = e.getErrorMessage();
+        log.error("requestUrl : {}, occurred an error : {}", req.getRequestURI(), errorMessages);
+        return MyResponse.failureResponse(errorMessages);
+    }
 
     /**
      * Handles MethodArgumentNotValidException thrown by Spring.

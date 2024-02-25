@@ -5,6 +5,7 @@ import com.shah.springjwttutorials.dto.UserLoginRequest;
 import com.shah.springjwttutorials.dto.UserLoginResponse;
 import com.shah.springjwttutorials.entity.Role;
 import com.shah.springjwttutorials.entity.UserRegistration;
+import com.shah.springjwttutorials.exception.MyException;
 import com.shah.springjwttutorials.jwt.JwtService;
 import com.shah.springjwttutorials.repository.RoleRepo;
 import com.shah.springjwttutorials.repository.UserRepo;
@@ -63,7 +64,7 @@ public class UserServiceImpl implements UserService {
 
         // Check if email is already registered
         userRepo.findByEmail(user.getEmail()).ifPresent(i -> {
-            throw new UsernameNotFoundException("Email [" + i.getEmail() + "] exists");
+            throw new MyException("Email [" + i.getEmail() + "] exists");
         });
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -75,7 +76,7 @@ public class UserServiceImpl implements UserService {
             // Filter duplication of roles & throw if roles doesn't exist
             new HashSet<>(user.getRoles()).forEach(role -> roleRepo.findByRoleName(role.getRoleName())
                     .ifPresentOrElse(roles2::add, () -> {
-                        throw new UsernameNotFoundException("Role [" + role + "] not found");
+                        throw new MyException("Role [" + role + "] not found");
                     }));
         }
         // Update user roles with existing roles
