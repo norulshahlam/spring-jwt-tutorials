@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,7 +41,11 @@ public class UserRegistration implements Serializable, UserDetails {
     @Email
     @Schema(example = "admin@gmail.com")
     private String email;
+    @NotNull
     private String name;
+    @NotNull
+    @Size(min = 8)
+    @Schema(example = "myPassword123")
     private String password;
     /**
      * This is needed as one user can have the same role as other user and other role
@@ -54,6 +60,7 @@ public class UserRegistration implements Serializable, UserDetails {
         return roles.stream().map(role -> new SimpleGrantedAuthority(
                 role.getRoleName().name())).toList();
     }
+
     @JsonIgnore
     @Override
     public String getUsername() {
