@@ -37,6 +37,7 @@ public class MyStartup {
             Role approver = Role.builder().roleName(APPROVER).build();
 
             log.info("Saving roles...");
+            // Once this is saved, all these roles will be assigned an id. This is possible because object are assigned by reference
             roleRepo.saveAll(List.of(admin, applicant, assessor, approver));
 
             UserRegistration userAdmin = UserRegistration.builder()
@@ -63,7 +64,7 @@ public class MyStartup {
                     .password(passwordEncoder.encode("1234"))
                     .roles(List.of(approver))
                     .build();
-
+            log.info("applicant: {}", userApplicant);
             log.info("Saving users...");
             userRepo.save(userAdmin);
             userRepo.save(userApplicant);

@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
 
+/**
+ * @author NORUL
+ */
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
@@ -27,6 +30,7 @@ public class GlobalExceptionHandler {
      * @return a MyResponse object with an error message
      */
     @ExceptionHandler({MethodArgumentNotValidException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public MyResponse<List<Errors>> handleMethodArgumentNotValidException(HttpServletRequest req, MethodArgumentNotValidException e) {
         String requestUri = req.getRequestURI();
