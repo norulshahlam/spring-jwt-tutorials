@@ -1,5 +1,6 @@
 package com.shah.springjwttutorials.controller;
 
+import com.shah.springjwttutorials.dto.MyResponse;
 import com.shah.springjwttutorials.dto.UserLoginRequest;
 import com.shah.springjwttutorials.dto.UserLoginResponse;
 import com.shah.springjwttutorials.service.UserServiceImpl;
@@ -23,7 +24,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserLoginResponse> login(@RequestBody @Valid UserLoginRequest request) {
+    public ResponseEntity<MyResponse<UserLoginResponse>> login(@RequestBody @Valid UserLoginRequest request) {
         log.info("Logging in...");
         return ResponseEntity.ok(service.login(request));
     }
