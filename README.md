@@ -93,3 +93,14 @@ We have preloaded users with different roles for testing. Simply open a browser 
 - Login to retrieve JWT.
 - Use JWT and paste into Authorization input field.
 - Hit any endpoint to test your role
+
+
+### Useful resources
+
+<details>
+<summary>Click to expand</summary><br>
+
+Spring Auth using JPA
+
+    https://www.youtube.com/watch?v=awcCiqBO36E&t=1588s
+</details>
