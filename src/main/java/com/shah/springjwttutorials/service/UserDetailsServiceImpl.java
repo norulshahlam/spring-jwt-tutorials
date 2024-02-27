@@ -1,5 +1,6 @@
 package com.shah.springjwttutorials.service;
 
+import com.shah.springjwttutorials.pojo.dto.UserSecurity;
 import com.shah.springjwttutorials.repository.UserRepo;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,7 +22,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByEmail(username).orElseThrow(() ->
+        return userRepository.findByEmail(username)
+                .map(UserSecurity::new)
+                .orElseThrow(() ->
                 new UsernameNotFoundException("User Not Found with username: " + username));
     }
 }

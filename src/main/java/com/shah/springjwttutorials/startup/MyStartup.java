@@ -45,24 +45,32 @@ public class MyStartup {
                     .name("admin")
                     .password(passwordEncoder.encode("1234"))
                     .roles(List.of(admin, approver))
+                    .isEnabled(true)
+                    .company("ABC Limited")
                     .build();
             UserRegistration userApplicant = UserRegistration.builder()
                     .email("applicant@gmail.com")
                     .name("applicant")
                     .password(passwordEncoder.encode("1234"))
                     .roles(List.of(applicant))
+                    .isEnabled(true)
+                    .company("ABC Limited")
                     .build();
             UserRegistration userAssessor = UserRegistration.builder()
                     .email("assessor@gmail.com")
                     .name("assessor")
                     .password(passwordEncoder.encode("1234"))
                     .roles(List.of(assessor))
+                    .isEnabled(true)
+                    .company("ABC Limited")
                     .build();
             UserRegistration userApprover = UserRegistration.builder()
                     .email("approver@gmail.com")
                     .name("approver")
                     .password(passwordEncoder.encode("1234"))
                     .roles(List.of(approver))
+                    .isEnabled(true)
+                    .company("ABC Limited")
                     .build();
 
             log.info("Saving users...");

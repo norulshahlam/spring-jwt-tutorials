@@ -22,7 +22,6 @@ import java.util.List;
 @Builder
 public class UserSecurity implements UserDetails {
 
-
     private String email;
     private String name;
     private String password;
@@ -35,7 +34,7 @@ public class UserSecurity implements UserDetails {
         this.name = userRegistration.getName();
         this.password = userRegistration.getPassword();
         this.company = userRegistration.getCompany();
-        this.isEnabled = userRegistration.isEnabled();
+        this.isEnabled = userRegistration.getIsEnabled();
         this.roles = userRegistration.getRoles();
     }
 

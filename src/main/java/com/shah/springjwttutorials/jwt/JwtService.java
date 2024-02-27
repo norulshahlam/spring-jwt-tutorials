@@ -1,5 +1,6 @@
 package com.shah.springjwttutorials.jwt;
 
+import com.shah.springjwttutorials.pojo.dto.UserSecurity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -35,10 +36,12 @@ public class JwtService {
      * @param tokenType
      * @return
      */
-    public String generateToken(UserDetails user, String tokenType) {
+    public String generateToken(UserSecurity user, String tokenType) {
 
-        Map<String, Object> roles = Map.of(
-                "authorities", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList());
+        Map<String, Object> claims = Map.of(
+                "Authorities", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList(),
+                "IsEnabled", user.getIsEnabled(),
+                "Company",user.getCompany());
 
         Date exp = ACCESS_TOKEN.equalsIgnoreCase(tokenType)
                 ? new Date(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(accessTokenExpirationHours))
@@ -51,7 +54,7 @@ public class JwtService {
                 .setExpiration(exp)
                 .setIssuer("Norulshahlam & Co.")
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
-                .addClaims(roles)
+                .addClaims(claims)
                 .compact();
     }
 

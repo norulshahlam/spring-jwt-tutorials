@@ -3,6 +3,7 @@ package com.shah.springjwttutorials.service;
 import com.shah.springjwttutorials.pojo.dto.MyResponse;
 import com.shah.springjwttutorials.pojo.dto.UserLoginRequest;
 import com.shah.springjwttutorials.pojo.dto.UserLoginResponse;
+import com.shah.springjwttutorials.pojo.dto.UserSecurity;
 import com.shah.springjwttutorials.pojo.entity.Role;
 import com.shah.springjwttutorials.pojo.entity.UserRegistration;
 import com.shah.springjwttutorials.exception.MyException;
@@ -49,10 +50,12 @@ public class UserServiceImpl implements UserService {
     public MyResponse<UserLoginResponse> login(UserLoginRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 request.getEmail(), request.getPassword()));
-        UserRegistration user = userRepo.findByEmail(request.getEmail()).orElseThrow(() ->
-                new UsernameNotFoundException("Email [" + request.getEmail() + "] not found"));
-        String jwtAccessToken = jwtService.generateToken(user, ACCESS_TOKEN);
-        String jwtRefreshToken = jwtService.generateToken(user, REFRESH_TOKEN);
+        UserSecurity userSecurity = userRepo.findByEmail(request.getEmail())
+                .map(UserSecurity::new)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException("Email [" + request.getEmail() + "] not found"));
+        String jwtAccessToken = jwtService.generateToken(userSecurity, ACCESS_TOKEN);
+        String jwtRefreshToken = jwtService.generateToken(userSecurity, REFRESH_TOKEN);
         UserLoginResponse response = UserLoginResponse.builder()
                 .accessToken(jwtAccessToken)
                 .refreshToken(jwtRefreshToken)
