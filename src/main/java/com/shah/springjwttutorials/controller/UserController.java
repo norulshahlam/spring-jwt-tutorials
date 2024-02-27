@@ -1,9 +1,9 @@
 package com.shah.springjwttutorials.controller;
 
-import com.shah.springjwttutorials.dto.MyResponse;
-import com.shah.springjwttutorials.dto.UserLoginRequest;
-import com.shah.springjwttutorials.dto.UserLoginResponse;
-import com.shah.springjwttutorials.entity.UserRegistration;
+import com.shah.springjwttutorials.pojo.dto.MyResponse;
+import com.shah.springjwttutorials.pojo.dto.UserLoginRequest;
+import com.shah.springjwttutorials.pojo.dto.UserLoginResponse;
+import com.shah.springjwttutorials.pojo.entity.UserRegistration;
 import com.shah.springjwttutorials.service.UserServiceImpl;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;

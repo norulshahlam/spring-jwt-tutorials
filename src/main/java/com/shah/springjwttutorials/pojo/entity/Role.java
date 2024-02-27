@@ -1,8 +1,8 @@
-package com.shah.springjwttutorials.entity;
+package com.shah.springjwttutorials.pojo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.shah.springjwttutorials.enums.RoleName;
+import com.shah.springjwttutorials.pojo.enums.RoleName;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

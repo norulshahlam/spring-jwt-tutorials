@@ -1,4 +1,4 @@
-package com.shah.springjwttutorials.config;
+package com.shah.springjwttutorials.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.shah.springjwttutorials.dto;
+package com.shah.springjwttutorials.pojo.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;

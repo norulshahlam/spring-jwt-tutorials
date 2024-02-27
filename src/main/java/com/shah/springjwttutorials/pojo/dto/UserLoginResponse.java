@@ -1,4 +1,4 @@
-package com.shah.springjwttutorials.dto;
+package com.shah.springjwttutorials.pojo.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

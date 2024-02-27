@@ -1,4 +1,4 @@
-package com.shah.springjwttutorials.entity;
+package com.shah.springjwttutorials.pojo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;

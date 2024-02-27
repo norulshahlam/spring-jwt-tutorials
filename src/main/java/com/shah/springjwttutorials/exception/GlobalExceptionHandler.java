@@ -1,6 +1,6 @@
 package com.shah.springjwttutorials.exception;
 
-import com.shah.springjwttutorials.dto.MyResponse;
+import com.shah.springjwttutorials.pojo.dto.MyResponse;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;

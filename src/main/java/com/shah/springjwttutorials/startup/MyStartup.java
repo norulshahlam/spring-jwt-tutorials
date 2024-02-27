@@ -1,7 +1,7 @@
 package com.shah.springjwttutorials.startup;
 
-import com.shah.springjwttutorials.entity.Role;
-import com.shah.springjwttutorials.entity.UserRegistration;
+import com.shah.springjwttutorials.pojo.entity.Role;
+import com.shah.springjwttutorials.pojo.entity.UserRegistration;
 import com.shah.springjwttutorials.repository.RoleRepo;
 import com.shah.springjwttutorials.repository.UserRepo;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static com.shah.springjwttutorials.enums.RoleName.*;
+import static com.shah.springjwttutorials.pojo.enums.RoleName.*;
 
 @Component
 @Slf4j

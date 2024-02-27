@@ -1,4 +1,4 @@
-package com.shah.springjwttutorials.enums;
+package com.shah.springjwttutorials.pojo.enums;
 
 public enum RoleName {
 

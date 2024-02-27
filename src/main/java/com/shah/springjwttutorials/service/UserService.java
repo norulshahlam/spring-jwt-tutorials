@@ -1,9 +1,9 @@
 package com.shah.springjwttutorials.service;
 
-import com.shah.springjwttutorials.dto.MyResponse;
-import com.shah.springjwttutorials.dto.UserLoginRequest;
-import com.shah.springjwttutorials.entity.Role;
-import com.shah.springjwttutorials.entity.UserRegistration;
+import com.shah.springjwttutorials.pojo.dto.MyResponse;
+import com.shah.springjwttutorials.pojo.dto.UserLoginRequest;
+import com.shah.springjwttutorials.pojo.entity.Role;
+import com.shah.springjwttutorials.pojo.entity.UserRegistration;
 
 /**
  * @author NORUL

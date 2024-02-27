@@ -1,6 +1,6 @@
 package com.shah.springjwttutorials.repository;
 
-import com.shah.springjwttutorials.entity.UserRegistration;
+import com.shah.springjwttutorials.pojo.entity.UserRegistration;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

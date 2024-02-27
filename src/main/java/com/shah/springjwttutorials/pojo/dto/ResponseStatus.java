@@ -1,4 +1,4 @@
-package com.shah.springjwttutorials.dto;
+package com.shah.springjwttutorials.pojo.dto;
 
 public enum ResponseStatus {
     SUCCESS,

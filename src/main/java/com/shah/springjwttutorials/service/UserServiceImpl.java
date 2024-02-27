@@ -1,10 +1,10 @@
 package com.shah.springjwttutorials.service;
 
-import com.shah.springjwttutorials.dto.MyResponse;
-import com.shah.springjwttutorials.dto.UserLoginRequest;
-import com.shah.springjwttutorials.dto.UserLoginResponse;
-import com.shah.springjwttutorials.entity.Role;
-import com.shah.springjwttutorials.entity.UserRegistration;
+import com.shah.springjwttutorials.pojo.dto.MyResponse;
+import com.shah.springjwttutorials.pojo.dto.UserLoginRequest;
+import com.shah.springjwttutorials.pojo.dto.UserLoginResponse;
+import com.shah.springjwttutorials.pojo.entity.Role;
+import com.shah.springjwttutorials.pojo.entity.UserRegistration;
 import com.shah.springjwttutorials.exception.MyException;
 import com.shah.springjwttutorials.jwt.JwtService;
 import com.shah.springjwttutorials.repository.RoleRepo;
@@ -23,7 +23,7 @@ import java.util.List;
 
 import static com.shah.springjwttutorials.constants.MyConstants.ACCESS_TOKEN;
 import static com.shah.springjwttutorials.constants.MyConstants.REFRESH_TOKEN;
-import static com.shah.springjwttutorials.dto.MyResponse.successResponse;
+import static com.shah.springjwttutorials.pojo.dto.MyResponse.successResponse;
 
 /**
  * @author NORUL
