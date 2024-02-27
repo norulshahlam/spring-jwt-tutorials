@@ -64,7 +64,7 @@ public class MyStartup {
                     .password(passwordEncoder.encode("1234"))
                     .roles(List.of(approver))
                     .build();
-            log.info("applicant: {}", userApplicant);
+
             log.info("Saving users...");
             userRepo.save(userAdmin);
             userRepo.save(userApplicant);
