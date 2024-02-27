@@ -47,6 +47,8 @@ public class UserRegistration implements Serializable, UserDetails {
     @Size(min = 8)
     @Schema(example = "myPassword123")
     private String password;
+    private String company;
+    private Boolean isEnabled;
     /**
      * This is needed as one user can have the same role as other user and other role
      * e.g. admin user can have role ADMIN and APPROVER while approver user can have only APPROVER role
